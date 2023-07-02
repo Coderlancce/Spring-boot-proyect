@@ -2,24 +2,28 @@ package com.coderlancce.Entity;
 
 import jakarta.persistence.*;
 
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
+@Table(name = "users")
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    private String username;
     private String name;
+    private String lastName;
+    private String password;
     private String email;
-    private Integer age;
+    private String phone;
+    private Boolean enabled = true;
+    private String profile;
 
-    public User(Integer id, String name, String email, Integer age){
-        this.id = id;
-        this.name = name;
-        this.email = email;
-        this.age = age;
-    }
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "users")
+    private Set<UserRol> userRols = new HashSet<>();
 
     public User(){}
 
@@ -31,12 +35,32 @@ public class User {
         this.id = id;
     }
 
+    public String getUsername(){ return username;}
+
+    public void setUsername(String username){ this.username = username;}
+
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getEmail() {
@@ -47,34 +71,35 @@ public class User {
         this.email = email;
     }
 
-    public Integer getAge() {
-        return age;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setAge(Integer age) {
-        this.age = age;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return Objects.equals(id, user.id) && Objects.equals(name, user.name) && Objects.equals(email, user.email) && Objects.equals(age, user.age);
+    public Boolean getEnabled() {
+        return enabled;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name, email, age);
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", email='" + email + '\'' +
-                ", age=" + age +
-                '}';
+    public String getProfile() {
+        return profile;
+    }
+
+    public void setProfile(String profile) {
+        this.profile = profile;
+    }
+
+    public Set<UserRol> getUserRols() {
+        return userRols;
+    }
+
+    public void setUserRols(Set<UserRol> userRols) {
+        this.userRols = userRols;
     }
 }
