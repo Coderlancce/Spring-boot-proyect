@@ -15,7 +15,7 @@ public class UserRol {
     @ManyToOne
     private Rol rol;
 
-    public UserRol(){}
+    public UserRol(){   }
 
     public Long getUserRolId() {
         return userRolId;

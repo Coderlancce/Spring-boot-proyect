@@ -3,7 +3,6 @@ package com.coderlancce.Entity;
 import jakarta.persistence.*;
 
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -12,26 +11,26 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
     private String username;
     private String name;
     private String lastName;
     private String password;
     private String email;
     private String phone;
-    private Boolean enabled = true;
+    private Boolean status = true;
     private String profile;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "users")
-    private Set<UserRol> userRols = new HashSet<>();
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "user")
+    private Set<UserRol> userRoles = new HashSet<>();
 
     public User(){}
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -80,11 +79,11 @@ public class User {
     }
 
     public Boolean getEnabled() {
-        return enabled;
+        return status;
     }
 
     public void setEnabled(Boolean enabled) {
-        this.enabled = enabled;
+        this.status = enabled;
     }
 
     public String getProfile() {
@@ -95,11 +94,11 @@ public class User {
         this.profile = profile;
     }
 
-    public Set<UserRol> getUserRols() {
-        return userRols;
+    public Set<UserRol> getUserRoles() {
+        return userRoles;
     }
 
-    public void setUserRols(Set<UserRol> userRols) {
-        this.userRols = userRols;
+    public void setUserRoles(Set<UserRol> userRoles) {
+        this.userRoles = userRoles;
     }
 }
